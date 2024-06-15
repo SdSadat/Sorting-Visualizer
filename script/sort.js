@@ -1,4 +1,4 @@
-import { sleep,swap } from "./utils.js";
+import { sleep, swap } from "./utils.js";
 import { bubbleSort } from "./Algorithms/BubbleSort.js";
 import { insertionSort } from "./Algorithms/InsertionSort.js";
 import { selectionSort } from "./Algorithms/SelectionSort.js";
@@ -6,8 +6,8 @@ import { mergeSort } from "./Algorithms/MergeSort.js";
 import { quickSort } from "./Algorithms/QuickSort.js";
 let width = 100;
 
-if(screen.width<786){
-width = 40;
+if (screen.width < 786) {
+    width = 40;
 }
 let containerElement = document.querySelector('.container');
 
@@ -30,7 +30,7 @@ function renderAlgorithmList() {
         addPseudoCode();
     });
     let sortingList = document.getElementById('sorting-list');
-    for(let i=0;i<algorithmsList.length;i++){
+    for (let i = 0; i < algorithmsList.length; i++) {
         let option = document.createElement('option');
         option.value = algorithmsList[i];
         option.innerText = algorithmsList[i];
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderAlgorithmList();
 
     class Bar {
-        constructor(height, barElement,index) {
+        constructor(height, barElement, index) {
             this.index = index;
             this.barElement = barElement;
             this.height = height;
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let divElement = document.createElement('div');
         let height = Math.floor(Math.random() * 100);
         divElement.style.height = height + '%';
-        bars.push(new Bar(height, divElement,i));
+        bars.push(new Bar(height, divElement, i));
         containerElement.appendChild(divElement);
     }
 
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 
-function renderPseduoCode(){
+function renderPseduoCode() {
     let pseudoButton = document.getElementById('pseudoButton');
     pseudoButton.addEventListener('click', () => {
         const pseudoCodeCard = document.getElementById('pseudoCodeCard');
@@ -128,8 +128,8 @@ function renderPseduoCode(){
     });
 }
 
-function addPseudoCode(){
-   
+function addPseudoCode() {
+
     const pseudoCodeElement = document.getElementById('pseudoCode');
     let selectedAlgorithm = document.getElementById('algorithm').value;
     document.querySelector('.pseudoCode .top h3').innerHTML = selectedAlgorithm;
@@ -145,5 +145,5 @@ array[j + 1] = key
     `;
 
     pseudoCodeElement.textContent = pseudoCode;
-    
+
 }
