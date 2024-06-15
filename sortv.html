@@ -7,8 +7,39 @@
     <link rel="stylesheet" href="style/sortv.css">
 </head>
 <body>
-    
-    
-    <script src="script/sortv.js"></script>
+    <nav>
+        <div class="title">SORTV</div>
+
+        <div class="right">
+          <div class="algorithm">
+            <label for="algorithm">Choose an algorithm:</label>
+            <select name="algorithm" id="algorithm">
+              <optgroup label="Sorting: " id="sorting-list">
+              </oaptgroup>
+            </select>
+          </div>
+
+            <button class="sort-button">Sort</button>
+
+
+            <div class="animationSpeed">
+              <label for="animationSpeed">Animation Speed:</label>
+              <select name="animationSpeed" id="animationSpeed">
+                  <option value="fast">Fast</option>
+                  <option value="medium" selected>Medium</option>
+                  <option value="slow">Slow</option>
+                </optgroup>
+              </select>
+            </div>
+
+        </div>
+
+    </nav>
+
+    <div class="container">
+
+    </div>
+
+    <script type="module" src="script/sort.js"></script>
 </body>
 </html>

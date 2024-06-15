@@ -2,4 +2,45 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+nav{
+border: 2px solid black;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: aquamarine;
+}
+nav .title{
+    text-align: center;
+}
+
+.container{
+    display: flex;
+    height: 85vh;
+    width: 80%;
+    margin: 10px auto;
+    background-color: blanchedalmond;
+
+    position: relative;
+
+    
+    align-items: flex-end;
+}
+
+.container div{
+    bottom: 0;
+    width: 10%;
+    border: 2px solid black;
+    background-color: royalblue;
+}
+
+.right{
+    display: flex;
+    gap:20px;
+}
+.sort-button{
+    padding:0 5px;
 }
