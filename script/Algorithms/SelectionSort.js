@@ -1,23 +1,31 @@
 import { sleep,swap } from "../utils.js";
 
-
-export async function selectionSort(bars,sleepTime){
-    let n = bars.length;
-    for(let i = 1;i<=n;i++){
-        let t = i-1;
-        let value = bars[i].height;
-
-        while(t>=0 && bars[t].height>value){
-            bars[t].barElement.style.backgroundColor = 'red';
+export async function selectionSort(bars,sleepTime) {
+    for (let i = 0; i < bars.length; i++) {
+        let minIndex = i;
+        for (let j = i + 1; j < bars.length; j++) {
+            bars[j].barElement.style.backgroundColor = 'red';
+            bars[minIndex].barElement.style.backgroundColor = 'green';
             await sleep(sleepTime);
-            bars[t+1].height = bars[t].height;
-            bars[t].barElement.style.height = bars[t].height + '%';
-            bars[t + 1].barElement.style.height = bars[t + 1].height + '%';
-            bars[t].barElement.style.backgroundColor = 'blue';
-            t--;
+            if (bars[j].height < bars[minIndex].height) {
+                bars[minIndex].barElement.style.backgroundColor = 'blue';
+                minIndex = j;
+            }
+            bars[j].barElement.style.backgroundColor = 'blue';
+            bars[minIndex].barElement.style.backgroundColor = 'blue';
         }
-        bars[t+1].height = value;
+        bars[i].barElement.style.backgroundColor = 'purple';
+        bars[minIndex].barElement.style.backgroundColor = 'green';
+        swap(i, minIndex,bars);
+        
+        await sleep(100);
+        bars[i].barElement.style.height = bars[i].height + '%';
+        bars[minIndex].barElement.style.height = bars[minIndex].height + '%';
+        bars[i].barElement.style.backgroundColor = 'blue';
+        bars[minIndex].barElement.style.backgroundColor = 'blue';
     }
-
-
+    for (let i = 0; i < bars.length; i++) {
+        bars[i].barElement.style.backgroundColor = 'green';
+        await sleep(3);
+    }
 }
