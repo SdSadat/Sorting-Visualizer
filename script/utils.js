@@ -10,7 +10,7 @@ export function swap(i, j, bars) {
     bars[j].height = temp;
 }
 
-export async function swapBars(bars, i, cursor) {
+export async function swapBars(bars, i, cursor,sleepTime) {
     bars[i].barElement.style.backgroundColor = 'red';
     bars[cursor].barElement.style.backgroundColor = 'green';
     bars[i].barElement.style.transition = 'height 0.3s ease';
@@ -23,7 +23,7 @@ export async function swapBars(bars, i, cursor) {
         bars[i].barElement.style.height = bars[i].height + '%';
         bars[cursor].barElement.style.height = bars[cursor].height + '%';
 
-        await sleep(50);
+        await sleep(sleepTime);
     }
 
     bars[i].barElement.style.backgroundColor = 'blue';

@@ -2,7 +2,10 @@ import { sleep, swapBars } from "../utils.js";
 
 export async function quickSort(bars, sleepTime) {
     await sortQuick(bars, 0, bars.length - 1, sleepTime);
-    console.log(bars);
+    for (let i = 0; i < bars.length; i++) {
+        bars[i].barElement.style.backgroundColor = 'green';
+        await sleep(3);
+    }
 }
 
 async function sortQuick(bars, low, high, sleepTime) {
@@ -22,16 +25,13 @@ async function partition(bars, low, high, sleepTime) {
     for (let i = low; i < high; i++) {
         if (bars[i].height <= pivotElement.height) {
             cursor++;
-            await swapBars(bars, i, cursor, sleepTime);
+            await swapBars(bars, i, cursor, 100);
         }
     }
 
     cursor++;
-    await swapBars(bars, cursor, high, sleepTime);
-
+    await swapBars(bars, cursor, high, 200);
     pivotElement.barElement.style.backgroundColor = 'blue';
 
     return cursor;
 }
-
-

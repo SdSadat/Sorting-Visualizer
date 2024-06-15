@@ -4,7 +4,7 @@ import { insertionSort } from "./Algorithms/InsertionSort.js";
 import { selectionSort } from "./Algorithms/SelectionSort.js";
 import { quickSort } from "./Algorithms/QuickSort.js";
 // import { mergeSort } from "./Algorithms/MergeSort.js";
-let width = 100;
+let width = 50;
 
 if (screen.width < 786) {
     width = 40;
@@ -63,10 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     sleepTime = getSleepTime(speedInput.value);
 
-
-
-
-
     renderAlgorithmList();
 
     class Bar {
@@ -80,10 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     let bars = [];
-
-    // Add algorithm list
-
-
     for (let i = 0; i < width; i++) {
         let divElement = document.createElement('div');
         let height = Math.floor(Math.random() * 100);
@@ -95,14 +87,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Sort Button
     let isSorting = false;
     let sortButton = document.querySelector('.sort-button');
-    sortButton.addEventListener('click', function () {
+    sortButton.addEventListener('click', async function () {
+        if (isSorting) {
+            console.log('already sorting');
+            return;
+        }
         let selectedAlgorithm = document.getElementById('algorithm').value;
         let sortFunction = sortingAlgorithms.get(selectedAlgorithm);
-        if (sortFunction && !isSorting) {
+        if (sortFunction) {
             isSorting = true;
-            sortFunction(bars, sleepTime);
+            await sortFunction(bars, sleepTime);
+            isSorting = false;
         } else {
-            console.error('Selected algorithm function not found');
+            console.log('Selected algorithm function not found');
         }
     });
 
@@ -114,7 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const pseudoCodeCard = document.getElementById('pseudoCodeCard');
         pseudoCodeCard.style.display = 'none';
     });
-
 
 })
 
@@ -144,6 +140,6 @@ while j >= 0 and array[j] > key:
 array[j + 1] = key
     `;
 
-    pseudoCodeElement.textContent = pseudoCode;
+    pseudoCodeElement.innerHTML = pseudoCode;
 
 }
