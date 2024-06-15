@@ -90,12 +90,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Sort Button
-
+    let isSorting = false;
     let sortButton = document.querySelector('.sort-button');
     sortButton.addEventListener('click', function () {
         let selectedAlgorithm = document.getElementById('algorithm').value;
         let sortFunction = sortingAlgorithms.get(selectedAlgorithm);
-        if (sortFunction) {
+        if (sortFunction && !isSorting) {
+            isSorting = true;
             sortFunction(bars, sleepTime);
         } else {
             console.error('Selected algorithm function not found');
