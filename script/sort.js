@@ -2,8 +2,11 @@ import { sleep,swap } from "./utils.js";
 import { bubbleSort } from "./Algorithms/BubbleSort.js";
 import { insertionSort } from "./Algorithms/InsertionSort.js";
 import { selectionSort } from "./Algorithms/SelectionSort.js";
-
 let width = 100;
+
+if(screen.width<786){
+width = 40;
+}
 let containerElement = document.querySelector('.container');
 
 let algorithmsList = ['BubbleSort', 'SelectionSort', 'InsertionSort', 'MergeSort', 'QuickSort', 'HeapSort'];
