@@ -23,7 +23,7 @@ export async function swapBars(bars, i, cursor) {
         bars[i].barElement.style.height = bars[i].height + '%';
         bars[cursor].barElement.style.height = bars[cursor].height + '%';
 
-        await sleep(500);
+        await sleep(50);
     }
 
     bars[i].barElement.style.backgroundColor = 'blue';

@@ -1,45 +1,37 @@
-import { sleep, swap, swapBars } from "../utils.js";
+import { sleep, swapBars } from "../utils.js";
 
 export async function quickSort(bars, sleepTime) {
-    await sortQuick(bars, sleepTime);
+    await sortQuick(bars, 0, bars.length - 1, sleepTime);
     console.log(bars);
 }
 
-async function sortQuick(bars, sleepTime) {
-    if (bars.length <= 1) {
-        return;
+async function sortQuick(bars, low, high, sleepTime) {
+    if (low < high) {
+        let pivotPos = await partition(bars, low, high, sleepTime);
+        await sortQuick(bars, low, pivotPos - 1, sleepTime);
+        await sortQuick(bars, pivotPos + 1, high, sleepTime);
     }
-
-    let pivotPos = await partition(bars, sleepTime);
-
-    console.log('pivotpos',pivotPos);
-    console.log('bars lenght',bars.length);
-    await sortQuick(bars.toSpliced(0, pivotPos), sleepTime);
-    await sortQuick(bars.toSpliced(pivotPos), sleepTime);
-
 }
 
-async function partition(bars, sleepTime) {
-
-    let pivotElement = bars[bars.length - 1];
-
+async function partition(bars, low, high, sleepTime) {
+    let pivotElement = bars[high];
     pivotElement.barElement.style.backgroundColor = 'yellow';
 
-    let cursor = -1;
+    let cursor = low - 1;
 
-    for (let i = 0; i < bars.length; i++) {
+    for (let i = low; i < high; i++) {
         if (bars[i].height <= pivotElement.height) {
             cursor++;
-            await swapBars(bars, i, cursor);
+            await swapBars(bars, i, cursor, sleepTime);
         }
     }
 
     cursor++;
+    await swapBars(bars, cursor, high, sleepTime);
 
-    await swapBars(bars, bars.length - 1, cursor);
+    pivotElement.barElement.style.backgroundColor = 'blue';
 
     return cursor;
 }
-
 
 

@@ -2,8 +2,8 @@ import { sleep, swap } from "./utils.js";
 import { bubbleSort } from "./Algorithms/BubbleSort.js";
 import { insertionSort } from "./Algorithms/InsertionSort.js";
 import { selectionSort } from "./Algorithms/SelectionSort.js";
-import { mergeSort } from "./Algorithms/MergeSort.js";
 import { quickSort } from "./Algorithms/QuickSort.js";
+// import { mergeSort } from "./Algorithms/MergeSort.js";
 let width = 100;
 
 if (screen.width < 786) {
@@ -18,8 +18,8 @@ let sortingAlgorithms = new Map([
     ['BubbleSort', bubbleSort],
     ['InsertionSort', insertionSort],
     ['SelectionSort', selectionSort],
-    ['MergeSort', mergeSort],
     ['QuickSort', quickSort],
+    // ['MergeSort', mergeSort],
     // ['HeapSort', heapSort],
 ]);
 
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'medium':
                 return 50;
             case 'slow':
-                return 1000;
+                return 500;
             default:
                 return 50;
         }
