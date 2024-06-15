@@ -7,7 +7,16 @@ let containerElement = document.querySelector('.container');
 
 let algorithmsList = ['BubbleSort', 'SelectionSort', 'InsertionSort', 'MergeSort', 'QuickSort', 'HeapSort'];
 
-let selectedAlgorithm = Map();
+let sortingAlgorithms = new Map([
+    ['BubbleSort', bubbleSort],
+    ['SelectionSort', selectionSort],
+    // Add other sorting algorithms here
+    // ['InsertionSort', insertionSort],
+    // ['MergeSort', mergeSort],
+    // ['QuickSort', quickSort],
+    // ['HeapSort', heapSort],
+]);
+
 function renderAlgorithmList() {
     let sortingList = document.getElementById('sorting-list');
     for(let i=0;i<algorithmsList.length;i++){
@@ -74,8 +83,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let sortButton = document.querySelector('.sort-button');
     sortButton.addEventListener('click', function () {
-       bubbleSort(bars,sleepTime);
-
+        let selectedAlgorithm = document.getElementById('algorithm').value;
+        let sortFunction = sortingAlgorithms.get(selectedAlgorithm);
+        if (sortFunction) {
+            sortFunction(bars, sleepTime);
+        } else {
+            console.error('Selected algorithm function not found');
+        }
     });
 
 
