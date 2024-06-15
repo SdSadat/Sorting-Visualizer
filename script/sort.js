@@ -2,6 +2,8 @@ import { sleep,swap } from "./utils.js";
 import { bubbleSort } from "./Algorithms/BubbleSort.js";
 import { insertionSort } from "./Algorithms/InsertionSort.js";
 import { selectionSort } from "./Algorithms/SelectionSort.js";
+import { mergeSort } from "./Algorithms/MergeSort.js";
+import { quickSort } from "./Algorithms/QuickSort.js";
 let width = 100;
 
 if(screen.width<786){
@@ -16,8 +18,8 @@ let sortingAlgorithms = new Map([
     ['BubbleSort', bubbleSort],
     ['InsertionSort', insertionSort],
     ['SelectionSort', selectionSort],
-    // ['MergeSort', mergeSort],
-    // ['QuickSort', quickSort],
+    ['MergeSort', mergeSort],
+    ['QuickSort', quickSort],
     // ['HeapSort', heapSort],
 ]);
 
@@ -68,7 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
     renderAlgorithmList();
 
     class Bar {
-        constructor(height, barElement) {
+        constructor(height, barElement,index) {
+            this.index = index;
             this.barElement = barElement;
             this.height = height;
             this.isSelected = false;
@@ -85,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let divElement = document.createElement('div');
         let height = Math.floor(Math.random() * 100);
         divElement.style.height = height + '%';
-        bars.push(new Bar(height, divElement));
+        bars.push(new Bar(height, divElement,i));
         containerElement.appendChild(divElement);
     }
 
