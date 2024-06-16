@@ -7,6 +7,9 @@ class Bar {
     }
 
 }
+export function clearBars(containerElement){
+    containerElement.innerHTML = '';
+}
 
 export function renderBars(bars,containerElement,width) {
     for (let i = 0; i < width; i++) {
@@ -17,3 +20,4 @@ export function renderBars(bars,containerElement,width) {
         containerElement.appendChild(divElement);
     }
 }
+

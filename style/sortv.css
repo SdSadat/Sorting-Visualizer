@@ -54,7 +54,15 @@ nav .left .title{
     
 }
 
-
+.reset-button{
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: lightblue;
+    padding: 0 10px;
+    margin: 0 10px;
+    cursor: pointer;
+    border-radius: 10px;
+}
 .sort-button{
     font-size: 1rem;
     font-weight: 600;

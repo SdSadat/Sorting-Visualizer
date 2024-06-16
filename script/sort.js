@@ -1,16 +1,19 @@
 import { sleep, sortCompleted } from "./utils.js";
-import { renderBars } from "./renderBars.js";
-import { renderPseduoCode } from "./renderPseudoCode.js";
+import { clearBars, renderBars } from "./renderBars.js";
+import { renderPseduoCode,addPseudoCode } from "./renderPseudoCode.js";
 import { bubbleSort } from "./Algorithms/BubbleSort.js";
 import { insertionSort } from "./Algorithms/InsertionSort.js";
 import { selectionSort } from "./Algorithms/SelectionSort.js";
 import { quickSort } from "./Algorithms/QuickSort.js";
 // import { mergeSort } from "./Algorithms/MergeSort.js";
 let width = 50;
+let isSorting = false;
+let isSorted = false;
 
 if (screen.width < 786) {
     width = 40;
 }
+let bars = [];
 let containerElement = document.querySelector('.container');
 
 let algorithmsList = ['BubbleSort', 'SelectionSort', 'InsertionSort', 'MergeSort', 'QuickSort', 'HeapSort'];
@@ -25,7 +28,10 @@ let sortingAlgorithms = new Map([
     // ['HeapSort', heapSort],
 ]);
 
-
+function initializeBars(){
+    bars=[];
+    renderBars(bars,containerElement,width);
+}
 function renderAlgorithmList() {
     let algorithmElement = document.getElementById('algorithm');;
     algorithmElement.addEventListener('change', () => {
@@ -68,12 +74,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // Sort Button
-    let isSorting = false;
+
     let sortButton = document.querySelector('.sort-button');
     sortButton.addEventListener('click', async function () {
         if (isSorting) {
             console.log('already sorting');
             return;
+        }
+        if(isSorted){
+            isSorted = false;
+            clearBars(containerElement);
+            initializeBars();
         }
         let selectedAlgorithm = document.getElementById('algorithm').value;
         let sortFunction = sortingAlgorithms.get(selectedAlgorithm);
@@ -81,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
             isSorting = true;
             await sortFunction(bars, sleepTime);
             sortCompleted(bars);
+            isSorted = true;
             isSorting = false;
         } else {
             console.log('Selected algorithm function not found');
@@ -88,8 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // render Bars
-    let bars = [];
-    renderBars(bars,containerElement,width);
+    initializeBars();
 
     // Pseudo Code Button
     renderPseduoCode();

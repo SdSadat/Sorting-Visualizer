@@ -19,7 +19,7 @@ document.getElementById('closeButton').addEventListener('click', () => {
 }
 
 
-function addPseudoCode() {
+export function addPseudoCode() {
 
     const pseudoCodeElement = document.getElementById('pseudoCode');
     let selectedAlgorithm = document.getElementById('algorithm').value;
