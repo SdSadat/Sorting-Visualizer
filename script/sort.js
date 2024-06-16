@@ -1,11 +1,13 @@
 import { sleep, sortCompleted } from "./utils.js";
 import { clearBars, renderBars } from "./renderBars.js";
 import { renderPseduoCode,addPseudoCode } from "./renderPseudoCode.js";
+import { renderInfoBox,updateInfoBox } from "./infoBox.js";
+
+// import sorting algorithms
 import { bubbleSort } from "./Algorithms/BubbleSort.js";
 import { insertionSort } from "./Algorithms/InsertionSort.js";
 import { selectionSort } from "./Algorithms/SelectionSort.js";
 import { quickSort } from "./Algorithms/QuickSort.js";
-import { renderInfoBox,updateInfoBox } from "./infoBox.js";
 import { mergeSort } from "./Algorithms/MergeSort.js";
 import { heapSort } from "./Algorithms/HeapSort.js";
 
@@ -111,9 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (sortFunction) {
             isSorting = true;
             stopSort = false;
-
             updateInfoBox(selectedAlgorithm, bars.length, comparisonCount);
-
             await sortFunction(bars, sleepTime, () => stopSort);
 
             if (!stopSort) {
