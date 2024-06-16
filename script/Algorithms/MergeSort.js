@@ -5,7 +5,7 @@ import { updateComparisonCount } from "../sort.js";
 export async function mergeSort(bars, sleepTime,stopSorting){
 let n = bars.length;
 
-sortMerge(bars,n);
+await sortMerge(bars,n);
 
 console.log(bars);
 }
@@ -20,12 +20,12 @@ async function sortMerge(bars,n){
     let right = bars.slice(mid);
 
 
-    sortMerge(left,mid);
-    sortMerge(right,n-mid);
-    let temp = bars.slice();
+   await sortMerge(left,mid);
+   await  sortMerge(right,n-mid);
+let temp = bars.slice();
 
 
-    merge(temp,left,right);
+    await merge(temp,left,right);
 }
 
 async function merge(bars,left,right){

@@ -10,6 +10,7 @@ import { selectionSort } from "./Algorithms/SelectionSort.js";
 import { quickSort } from "./Algorithms/QuickSort.js";
 import { mergeSort } from "./Algorithms/MergeSort.js";
 import { heapSort } from "./Algorithms/HeapSort.js";
+import { bogoSort } from "./Algorithms/BogoSort.js";
 
 let width = 50;
 let isSorting = false;
@@ -24,7 +25,7 @@ if (screen.width < 786) {
 let bars = [];
 let containerElement = document.querySelector('.container');
 
-let algorithmsList = ['BubbleSort', 'SelectionSort', 'InsertionSort', 'MergeSort', 'QuickSort', 'HeapSort'];
+let algorithmsList = ['BubbleSort', 'SelectionSort', 'InsertionSort', 'MergeSort', 'QuickSort', 'HeapSort','BogoSort',];
 
 
 let sortingAlgorithms = new Map([
@@ -34,6 +35,7 @@ let sortingAlgorithms = new Map([
     ['QuickSort', quickSort],
     ['MergeSort', mergeSort],
     ['HeapSort', heapSort],
+    ['BogoSort', bogoSort],
 ]);
 
 function initializeBars(){
@@ -81,7 +83,6 @@ function getSleepTime(speed) {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-
     // Animation Speed 
     let speedInput = document.getElementById('animationSpeed');
     let sleepTime;

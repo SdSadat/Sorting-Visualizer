@@ -13,7 +13,7 @@ export function renderInfoBox(){
 
 export function updateInfoBox(algorithmName, barCount, comparisons) {
     document.getElementById('algorithmName').textContent = `Algorithm: ${algorithmName}`;
-    document.getElementById('barCount').textContent = `Number of Bars: ${barCount}`;
+    document.getElementById('barCount').textContent = `No. of Bars: ${barCount}`;
     document.getElementById('comparisons').textContent = `Comparisons: ${comparisons}`;
 }
 
