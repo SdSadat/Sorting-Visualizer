@@ -1,4 +1,6 @@
 import { sleep, sortCompleted } from "./utils.js";
+import { renderBars } from "./renderBars.js";
+import { renderPseduoCode } from "./renderPseudoCode.js";
 import { bubbleSort } from "./Algorithms/BubbleSort.js";
 import { insertionSort } from "./Algorithms/InsertionSort.js";
 import { selectionSort } from "./Algorithms/SelectionSort.js";
@@ -54,6 +56,7 @@ function getSleepTime(speed) {
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // Animation Speed 
     let speedInput = document.getElementById('animationSpeed');
     let sleepTime;
     speedInput.addEventListener('change', () => {
@@ -61,8 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(sleepTime);
     });
     sleepTime = getSleepTime(speedInput.value);
-
     renderAlgorithmList();
+
 
     // Sort Button
     let isSorting = false;
@@ -84,72 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    class Bar {
-        constructor(height, barElement, index) {
-            this.index = index;
-            this.barElement = barElement;
-            this.height = height;
-            this.isSelected = false;
-        }
-
-    }
-
+    // render Bars
     let bars = [];
-
-
-     function renderBars() {
-        for (let i = 0; i < width; i++) {
-            let divElement = document.createElement('div');
-            let height = Math.floor(Math.random() * 100);
-            divElement.style.height = height + '%';
-            bars.push(new Bar(height, divElement, i));
-            containerElement.appendChild(divElement);
-        }
-    }
-    renderBars();
+    renderBars(bars,containerElement,width);
 
     // Pseudo Code Button
-
     renderPseduoCode();
 
-    document.getElementById('closeButton').addEventListener('click', () => {
-        const pseudoCodeCard = document.getElementById('pseudoCodeCard');
-        pseudoCodeCard.style.display = 'none';
-    });
 
 })
-
-
-
-
-
-//Pseudo Code
-function renderPseduoCode() {
-    let pseudoButton = document.getElementById('pseudoButton');
-    pseudoButton.addEventListener('click', () => {
-        const pseudoCodeCard = document.getElementById('pseudoCodeCard');
-        addPseudoCode();
-        pseudoCodeCard.style.display = 'block';
-    });
-}
-
-
-function addPseudoCode() {
-
-    const pseudoCodeElement = document.getElementById('pseudoCode');
-    let selectedAlgorithm = document.getElementById('algorithm').value;
-    document.querySelector('.pseudoCode .top h3').innerHTML = selectedAlgorithm;
-    const pseudoCode = `
-function insertionSort(array):
-for i from 1 to length(array) - 1:
-key = array[i]
-j = i - 1
-while j >= 0 and array[j] > key:
-    array[j + 1] = array[j]
-    j = j - 1
-array[j + 1] = key
-    `;
-
-    pseudoCodeElement.innerHTML = pseudoCode;
-
-}
