@@ -98,6 +98,12 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Selected algorithm function not found');
         }
     });
+    // Reset button
+    let resetButton = document.querySelector('.reset-button');
+    resetButton.addEventListener('click',()=>{
+        clearBars(containerElement);
+        initializeBars();
+    })
 
     // render Bars
     initializeBars();
