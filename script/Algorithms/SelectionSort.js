@@ -1,4 +1,4 @@
-import { sleep, swap, swapBars } from "../utils.js";
+import { sleep, swap, swapBars,sortCompleted } from "../utils.js";
 
 export async function selectionSort(bars, sleepTime) {
     for (let i = 0; i < bars.length; i++) {
@@ -14,12 +14,8 @@ export async function selectionSort(bars, sleepTime) {
             bars[j].barElement.style.backgroundColor = 'blue';
             bars[minIndex].barElement.style.backgroundColor = 'blue';
         }
-        await swapBars(bars, i, minIndex);
+        await swapBars(bars, i, minIndex,sleepTime);
 
-    }
-    for (let i = 0; i < bars.length; i++) {
-        bars[i].barElement.style.backgroundColor = 'green';
-        await sleep(3);
     }
 }
 

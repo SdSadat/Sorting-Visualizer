@@ -1,4 +1,4 @@
-import { sleep, swap } from "./utils.js";
+import { sleep, sortCompleted } from "./utils.js";
 import { bubbleSort } from "./Algorithms/BubbleSort.js";
 import { insertionSort } from "./Algorithms/InsertionSort.js";
 import { selectionSort } from "./Algorithms/SelectionSort.js";
@@ -38,51 +38,31 @@ function renderAlgorithmList() {
     }
 
 }
+function getSleepTime(speed) {
+    switch (speed) {
+        case 'fast':
+            return 10;
+        case 'medium':
+            return 50;
+        case 'slow':
+            return 500;
+        default:
+            return 50;
+    }
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
 
     let speedInput = document.getElementById('animationSpeed');
     let sleepTime;
-
-    function getSleepTime(speed) {
-        switch (speed) {
-            case 'fast':
-                return 10;
-            case 'medium':
-                return 50;
-            case 'slow':
-                return 500;
-            default:
-                return 50;
-        }
-    }
-
     speedInput.addEventListener('change', () => {
         sleepTime = getSleepTime(speedInput.value);
         console.log(sleepTime);
     });
-
     sleepTime = getSleepTime(speedInput.value);
 
     renderAlgorithmList();
-
-    class Bar {
-        constructor(height, barElement, index) {
-            this.index = index;
-            this.barElement = barElement;
-            this.height = height;
-            this.isSelected = false;
-        }
-
-    }
-
-    let bars = [];
-    for (let i = 0; i < width; i++) {
-        let divElement = document.createElement('div');
-        let height = Math.floor(Math.random() * 100);
-        divElement.style.height = height + '%';
-        bars.push(new Bar(height, divElement, i));
-        containerElement.appendChild(divElement);
-    }
 
     // Sort Button
     let isSorting = false;
@@ -97,11 +77,36 @@ document.addEventListener('DOMContentLoaded', () => {
         if (sortFunction) {
             isSorting = true;
             await sortFunction(bars, sleepTime);
+            sortCompleted(bars);
             isSorting = false;
         } else {
             console.log('Selected algorithm function not found');
         }
     });
+
+    class Bar {
+        constructor(height, barElement, index) {
+            this.index = index;
+            this.barElement = barElement;
+            this.height = height;
+            this.isSelected = false;
+        }
+
+    }
+
+    let bars = [];
+
+
+     function renderBars() {
+        for (let i = 0; i < width; i++) {
+            let divElement = document.createElement('div');
+            let height = Math.floor(Math.random() * 100);
+            divElement.style.height = height + '%';
+            bars.push(new Bar(height, divElement, i));
+            containerElement.appendChild(divElement);
+        }
+    }
+    renderBars();
 
     // Pseudo Code Button
 
@@ -115,6 +120,10 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 
+
+
+
+//Pseudo Code
 function renderPseduoCode() {
     let pseudoButton = document.getElementById('pseudoButton');
     pseudoButton.addEventListener('click', () => {
@@ -123,6 +132,7 @@ function renderPseduoCode() {
         pseudoCodeCard.style.display = 'block';
     });
 }
+
 
 function addPseudoCode() {
 
