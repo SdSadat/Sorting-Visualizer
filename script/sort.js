@@ -32,10 +32,18 @@ function initializeBars(){
     bars=[];
     renderBars(bars,containerElement,width);
 }
+
+function reset(){
+    isSorted = false;
+    isSorting = false;
+    clearBars(containerElement);
+    initializeBars();
+}
 function renderAlgorithmList() {
     let algorithmElement = document.getElementById('algorithm');;
     algorithmElement.addEventListener('change', () => {
         addPseudoCode();
+        reset();
     });
     let sortingList = document.getElementById('sorting-list');
     for (let i = 0; i < algorithmsList.length; i++) {
@@ -101,8 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Reset button
     let resetButton = document.querySelector('.reset-button');
     resetButton.addEventListener('click',()=>{
-        clearBars(containerElement);
-        initializeBars();
+        reset();
     })
 
     // render Bars
