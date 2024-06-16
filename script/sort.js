@@ -5,10 +5,13 @@ import { bubbleSort } from "./Algorithms/BubbleSort.js";
 import { insertionSort } from "./Algorithms/InsertionSort.js";
 import { selectionSort } from "./Algorithms/SelectionSort.js";
 import { quickSort } from "./Algorithms/QuickSort.js";
+import { renderInfoBox,updateInfoBox } from "./infoBox.js";
+
 // import { mergeSort } from "./Algorithms/MergeSort.js";
 let width = 50;
 let isSorting = false;
 let isSorted = false;
+let comparisonCount = 0;
 
 if (screen.width < 786) {
     width = 40;
@@ -36,6 +39,7 @@ function initializeBars(){
 function reset(){
     isSorted = false;
     isSorting = false;
+    comparisonCount = 0;
     clearBars(containerElement);
     initializeBars();
 }
@@ -94,11 +98,17 @@ document.addEventListener('DOMContentLoaded', () => {
             clearBars(containerElement);
             initializeBars();
         }
+
         let selectedAlgorithm = document.getElementById('algorithm').value;
         let sortFunction = sortingAlgorithms.get(selectedAlgorithm);
+
         if (sortFunction) {
             isSorting = true;
+
+            updateInfoBox(selectedAlgorithm, bars.length, comparisonCount);
+
             await sortFunction(bars, sleepTime);
+
             sortCompleted(bars);
             isSorted = true;
             isSorting = false;
@@ -118,5 +128,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Pseudo Code Button
     renderPseduoCode();
 
-
+    //info box
+    renderInfoBox();
 })
+
+export async function updateComparisonCount() {
+    comparisonCount++;
+    document.getElementById('comparisons').textContent = `Comparisons: ${comparisonCount}`;
+}
