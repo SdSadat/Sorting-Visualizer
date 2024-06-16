@@ -6,12 +6,15 @@ import { insertionSort } from "./Algorithms/InsertionSort.js";
 import { selectionSort } from "./Algorithms/SelectionSort.js";
 import { quickSort } from "./Algorithms/QuickSort.js";
 import { renderInfoBox,updateInfoBox } from "./infoBox.js";
+import { mergeSort } from "./Algorithms/MergeSort.js";
+import { heapSort } from "./Algorithms/HeapSort.js";
 
-// import { mergeSort } from "./Algorithms/MergeSort.js";
 let width = 50;
 let isSorting = false;
 let isSorted = false;
 let comparisonCount = 0;
+let stopSort = false;
+
 
 if (screen.width < 786) {
     width = 40;
@@ -27,8 +30,8 @@ let sortingAlgorithms = new Map([
     ['InsertionSort', insertionSort],
     ['SelectionSort', selectionSort],
     ['QuickSort', quickSort],
-    // ['MergeSort', mergeSort],
-    // ['HeapSort', heapSort],
+    ['MergeSort', mergeSort],
+    ['HeapSort', heapSort],
 ]);
 
 function initializeBars(){
@@ -40,9 +43,12 @@ function reset(){
     isSorted = false;
     isSorting = false;
     comparisonCount = 0;
+    stopSort = true;
     clearBars(containerElement);
     initializeBars();
+    updateInfoBox('', bars.length, comparisonCount);
 }
+
 function renderAlgorithmList() {
     let algorithmElement = document.getElementById('algorithm');;
     algorithmElement.addEventListener('change', () => {
@@ -104,13 +110,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (sortFunction) {
             isSorting = true;
+            stopSort = false;
 
             updateInfoBox(selectedAlgorithm, bars.length, comparisonCount);
 
-            await sortFunction(bars, sleepTime);
+            await sortFunction(bars, sleepTime, () => stopSort);
 
-            sortCompleted(bars);
-            isSorted = true;
+            if (!stopSort) {
+                sortCompleted(bars);
+                isSorted = true;
+            }
             isSorting = false;
         } else {
             console.log('Selected algorithm function not found');
@@ -132,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderInfoBox();
 })
 
-export async function updateComparisonCount() {
+export  function updateComparisonCount() {
     comparisonCount++;
     document.getElementById('comparisons').textContent = `Comparisons: ${comparisonCount}`;
 }

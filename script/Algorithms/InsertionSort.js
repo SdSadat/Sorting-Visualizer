@@ -1,6 +1,6 @@
 import { sleep } from "../utils.js";
 import { updateComparisonCount } from "../sort.js";
-export async function insertionSort(bars, sleepTime) {
+export async function insertionSort(bars, sleepTime,stopSorting) {
     let n = bars.length;
 
     for (let i = 1; i < n; i++) {
@@ -13,7 +13,8 @@ export async function insertionSort(bars, sleepTime) {
 
 
         while (j > 0 && bars[j - 1].height > bars[j].height) {
-            await updateComparisonCount();
+            if(stopSorting()) return;
+             updateComparisonCount();
             bars[j].barElement.style.backgroundColor = 'red';
             bars[j - 1].barElement.style.backgroundColor = 'yellow';
 
