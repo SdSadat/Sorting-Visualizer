@@ -55,13 +55,6 @@ function reset(){
 
 function renderAlgorithmList() {
 
-    let widthSlider = document.getElementById('slider');
-    widthSlider.addEventListener('change',()=>{
-        width = widthSlider.value;
-        clearBars(containerElement);
-        initializeBars();
-    })
-
     let algorithmElement = document.getElementById('algorithm');;
     algorithmElement.addEventListener('change', () => {
         addPseudoCode();
@@ -91,6 +84,14 @@ function getSleepTime(speed) {
 
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    let widthSlider = document.getElementById('slider');
+    widthSlider.addEventListener('change',()=>{
+        width = widthSlider.value;
+        reset();
+        clearBars(containerElement);
+        initializeBars();
+    })
     // Animation Speed 
     let speedInput = document.getElementById('animationSpeed');
     let sleepTime;

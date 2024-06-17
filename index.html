@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SORTV</title>
+    <title>Sorting Visualizer</title>
     <link rel="stylesheet" href="style/sortv.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
+    <link rel="icon" type="image/x-icon" href="https://img.icons8.com/?size=100&id=qn2dSywXsveC&format=png&color=000000">
 </head>
 <body>
     <nav>
@@ -16,7 +16,6 @@
       </div>
 
         <div class="right">
-          <button class="reset-button">Reset<i class='bx bx-reset'></i></button>
           <div class="algorithm">
             <label for="algorithm">Choose an algorithm:</label>
             <select name="algorithm" id="algorithm">
@@ -24,7 +23,7 @@
               </oaptgroup>
             </select>
           </div>
-
+          
           
           
           <div class="animationSpeed">
@@ -41,6 +40,7 @@
           <label for="width">Number of Bars</label>
           <input type="range" min="10" max="200" value="50" class="slider" id="slider">
         </div>
+        <button class="reset-button">Reset<i class='bx bx-reset'></i></button>
 
         <button class="sort-button">Sort<i class='bx bx-sort-up'></i></button>
             <button class="pseudoButton" id="pseudoButton">Pseudo Code</button>
