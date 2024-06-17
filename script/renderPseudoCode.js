@@ -2,26 +2,26 @@
 //Pseudo Code
 const pseudoCodes = {
     'BubbleSort': `
-    function bubbleSort(arr):
+function bubbleSort(arr):
     n = length(arr)
     for i = 0 to n-1:
-        for j = 0 to (n-i-1):
+        for j = 0 to n-i-2:
             if arr[j] > arr[j+1]:
                 swap(arr[j], arr[j+1])
 `,
     'InsertionSort': `
-    function insertionSort(arr):
+function insertionSort(arr):
     n = length(arr)
     for i = 1 to n-1:
         key = arr[i]
         j = i - 1
-        while j >= 0 and arr[j] > key{
+        while j >= 0 and arr[j] > key:
             arr[j + 1] = arr[j]
-            j = j - 1 }
+            j = j - 1
         arr[j + 1] = key
 `,
     'SelectionSort': `
-    selectionSort(arr):
+function selectionSort(arr):
     n = length(arr)
     for i = 0 to n-1:
         minIndex = i
@@ -31,49 +31,44 @@ const pseudoCodes = {
         swap(arr[minIndex], arr[i])
 `,
     'MergeSort': `
-   function mergeSort(arr, left, right){
-    if left < right{
+function mergeSort(arr, left, right):
+    if left < right:
         mid = (left + right) / 2
         mergeSort(arr, left, mid)
         mergeSort(arr, mid + 1, right)
-        merge(arr, left, mid, right) }
-}
-   function merge(arr, left, mid, right){
+        merge(arr, left, mid, right)
+
+function merge(arr, left, mid, right):
     n1 = mid - left + 1
     n2 = right - mid
 
     leftArr = new array[n1]
     rightArr = new array[n2]
 
-    for i = 0 to n1-1{ leftArr[i] = arr[left + i] }
-    for j = 0 to n2-1{ rightArr[j] = arr[middle + 1 + j] }
+    for i = 0 to n1-1:
+        leftArr[i] = arr[left + i]
+    for j = 0 to n2-1:
+        rightArr[j] = arr[mid + 1 + j]
 
     i = 0, j = 0, k = left
 
-    while (i < n1 and j < n2){
-        if leftArr[i] <= rightArr[j]{
+    while i < n1 and j < n2:
+        if leftArr[i] <= rightArr[j]:
             arr[k] = leftArr[i]
-            i = i + 1 }
-        else{
+            i = i + 1
+        else:
             arr[k] = rightArr[j]
-            j = j + 1 }
+            j = j + 1
         k = k + 1
-        }
-    while i < n1{
+    while i < n1:
         arr[k] = leftArr[i]
         i = i + 1
-        k = k + 1 
-        }
-
-    while j < n2{
+        k = k + 1
+    while j < n2:
         arr[k] = rightArr[j]
         j = j + 1
-        k = k + 1 
-        }
-
-}
+        k = k + 1
 `,
-
     'QuickSort': `
 function quickSort(arr, low, high):
     if low < high:
@@ -131,9 +126,10 @@ function isSorted(arr):
 
 function shuffle(arr):
     for i = 0 to length(arr) - 1:
-        swap(arr[i], arr[randomIndex(length(arr))])
+        swap(arr[i], arr[randomIndex])
 `
 };
+
 
 export function renderPseduoCode() {
     let pseudoButton = document.getElementById('pseudoButton');
