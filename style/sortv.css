@@ -42,6 +42,7 @@ nav .left .title{
 nav .right{
     display: flex;
     font-weight: 600;
+    align-items: center;
 }
 
 nav .right > div, nav .right > button {
@@ -125,7 +126,7 @@ nav .right .pseudoButton {
     position: absolute;
     top: 50px;
     right: 50px;
-    width: 500px;
+    width: 380px;
     padding: 20px;
     background-color: white;
     border: 1px solid #ccc;
@@ -215,7 +216,7 @@ border: 2px solid rgba( 255, 255, 255, 0.18 );
 }
 
 footer{
-    font-size: 1.5rem;
+    font-size: 1rem;
     margin-top: auto;
     border: 1px solid black;
     font-weight: 500;
@@ -228,7 +229,19 @@ footer{
     background-color: aquamarine;
 
 }
-
+@media (min-width: 1000px){
+    nav .right > div, nav .right > button {
+        margin: 5px 20px;
+    }
+    
+    nav .right label {
+        margin-right: 15px;
+    }
+    
+    nav .right select, nav .right input, nav .right button {
+        padding: 5px 10px;
+    }
+}
 @media (max-width: 880px) {
     nav {
         /* flex-direction: column; */
