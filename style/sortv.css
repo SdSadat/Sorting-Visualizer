@@ -111,7 +111,7 @@ border: 2px solid rgba( 255, 255, 255, 0.18 );
 
 .top{
     /* border: 2px solid black; */
-    margin: 10px 0;
+    /* margin: 5px 0; */
 }
 .pseudo-code-card .top{
     position: relative;
@@ -134,7 +134,7 @@ border: 2px solid rgba( 255, 255, 255, 0.18 );
     right: 0;
 }
 .pseudo-code-card pre{
-    text-align: center;
+    /* text-align: center; */
     font-weight: 600;
 }
 
