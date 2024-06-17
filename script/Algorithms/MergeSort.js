@@ -1,57 +1,78 @@
-import { sleep, sortCompleted, swapBars } from "../utils.js";
+import { sleep, swapBars } from "../utils.js";
 import { updateComparisonCount } from "../sort.js";
 
-
-export async function mergeSort(bars, sleepTime,stopSorting){
-let n = bars.length;
-
-await sortMerge(bars,n);
-
-console.log(bars);
+export async function mergeSort(bars, sleepTime, stopSorting) {
+    await sortMerge(bars, 0, bars.length - 1, sleepTime, stopSorting);
 }
 
-async function sortMerge(bars,n){
-    if(n<=1) return;
-    console.log(bars,n);
+async function sortMerge(bars, left, right, sleepTime, stopSorting) {
+    if (left < right) {
+        const mid = Math.floor((left + right) / 2);
 
-    let mid =  Math.floor(n/2);
-
-    let left = bars.slice(0,mid);
-    let right = bars.slice(mid);
-
-
-   await sortMerge(left,mid);
-   await  sortMerge(right,n-mid);
-let temp = bars.slice();
-
-
-    await merge(temp,left,right);
+        await sortMerge(bars, left, mid, sleepTime, stopSorting);
+        await sortMerge(bars, mid + 1, right, sleepTime, stopSorting);
+        await merge(bars, left, mid, right, sleepTime, stopSorting);
+    }
 }
 
-async function merge(bars,left,right){
-    let i = 0,j=0,k=0;
+async function merge(bars, left, mid, right, sleepTime, stopSorting) {
+    const leftArray = [];
+    const rightArray = [];
 
-    while(i<left.length && j< right.length){
-        if(left[i].height < right[j].height){
-            bars[k].height = left[i].height;
+    for (let i = left; i <= mid; i++) {
+        bars[i].barElement.style.transition = 'height 0.3s ease';
+        bars[i].barElement.style.backgroundColor = 'yellow';
+        leftArray.push(bars[i].height);
+    }
+    await sleep(100);
+    for (let i = mid + 1; i <= right; i++) {
+        bars[i].barElement.style.transition = 'height 0.3s ease';
+        bars[i].barElement.style.backgroundColor = 'red';
+        rightArray.push(bars[i].height);
+    }
+    await sleep(100);
+
+    let arr = [];
+
+    let i = 0;
+    let j = 0;
+    let k = left;
+
+    while (i < leftArray.length && j < rightArray.length) {
+        if (stopSorting()) return;
+
+        updateComparisonCount();
+
+        if (leftArray[i] <= rightArray[j]) {
+            arr.push(leftArray[i]);
             i++;
-        }else{
-            bars[k].height = right[j].height;
+        } else {
+            arr.push(rightArray[j]);
+
             j++;
         }
-        k++;
     }
 
-    while(i<left.length){
-        bars[k].height = left[i].height;
+    while (i < leftArray.length) {
+        if (stopSorting()) return;
+
+        arr.push(leftArray[i]);
         i++;
-        k++;
-
     }
-    while(j<right.length){
-        bars[k].height = right[j].height;
+
+    while (j < rightArray.length) {
+        if (stopSorting()) return;
+        arr.push(rightArray[j]);
         j++;
-        k++;
     }
 
+    for(let i = left,j=0;i<=right;i++){
+        
+        bars[i].barElement.style.height = arr[j]+'%';
+        bars[i].barElement.style.backgroundColor = 'blue';
+        bars[i].height = arr[j];
+        await sleep(10);
+        j++;
+    }
+    await sleep(100);
 }
