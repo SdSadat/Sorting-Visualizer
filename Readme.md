@@ -1,5 +1,6 @@
-# SortV
-Website to get visualization for various sorting algorithms made with JavaScript: [SortV](https://sdsadat.github.io/SortV/)
+# Sorting Algorithm Visualizer
+Get visualization for various sorting algorithms
+check it out here: [Sorting Visualizer](https://sdsadat.github.io/Sorting-Visualizer/)
 
 ## Algorithms:
 - Bubble Sort
@@ -7,3 +8,5 @@ Website to get visualization for various sorting algorithms made with JavaScript
 - Insertion Sort
 - Quick Sort
 - Merge Sort
+- Heap Sort
+- Bogo Sort
